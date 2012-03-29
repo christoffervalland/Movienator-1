@@ -112,7 +112,6 @@ public class CommunityController implements MouseListener, ListSelectionListener
 		@Override
 		public void done() {
 			progressBarController.getProgressBarView().getProgressBar().setIndeterminate(false);
-			applicationController.getApplicationView().repaint();
 			communityView.repaint();
 		}
 	}

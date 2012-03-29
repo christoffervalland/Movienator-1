@@ -126,20 +126,10 @@ public class ApplicationController {
 	 */
 	public void setMoviePanelTab()
 	{
-		if(getActiveUser() == null) {
-			moviePanelController.enableFavouriteButton(false);
-		} else {
-			moviePanelController.enableFavouriteButton(true);
-		}
 		applicationView.repaint();
 		applicationView.getTabbedPane().setSelectedIndex(2);
 	}
-	
-	public void paintFavouritesPanel() {
-		applicationView.repaint();
-		applicationView.getFavouritesView().repaint();
-	}
-	
+
 	/**
 	 * Getter for searchHeaderController
 	 * @return the searchHeaderController
@@ -205,14 +195,6 @@ public class ApplicationController {
 	 */
 	public User getActiveUser(){
 		return user;
-	}
-	
-	/**
-	 * Getter for applicationView
-	 * @return applicationView
-	 */
-	public ApplicationView getApplicationView() {
-		return applicationView;
 	}
 
 

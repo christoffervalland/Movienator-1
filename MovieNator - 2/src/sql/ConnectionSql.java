@@ -124,7 +124,6 @@ public class ConnectionSql{
 		}
 	}
 	
-	
 	/**
 	 * Legger til brukere dersom brukeren ikke finnes. Skriver ut feilmelding om brukeren ligger der
 	 * @throws SQLException
@@ -137,6 +136,7 @@ public class ConnectionSql{
 		userSetn.setString(1, logonView.getNewUserName().getText());
 		userSetn.setString(2, logonView.getNewPassword().getText());
 		userSetn.setString(3, logonView.getNewScreenName().getText());
+		System.out.println(userSetn);
 		
 		try{
 			//Legger til ønsket informasjon i tabellen "User"
@@ -159,6 +159,7 @@ public class ConnectionSql{
 		String existingUser = logonView.getUserName().getText().toLowerCase();
 		String existingPassword = logonView.getPassword().getText().toLowerCase();
 		Statement st = conn.createStatement();
+		System.out.println(existingUser + " " + existingPassword);
 		ResultSet rs = st.executeQuery("SELECT EMAIL, PASSWORD, SCREENNAME FROM User");
 		while(rs.next()) {
 			String username = rs.getString(1);
@@ -243,6 +244,7 @@ public class ConnectionSql{
 	 * @author Lars Petter Johnsen
 	 */
 	public void getUserMovies() throws SQLException{
+		
 		String user = "SELECT * FROM Movie WHERE EMAIL = +(?)"; 
 		PreparedStatement userSetn = conn.prepareStatement(user);
 		userSetn.setString(1, applicationController.getActiveUser().getUserName());
@@ -264,17 +266,14 @@ public class ConnectionSql{
 			String Genre = rs.getString(13);
 			Boolean Favourited = rs.getBoolean(14);
 			String Link = rs.getString(15);
-			JsonObject similar = movieFactory.getRt().similarMovie(ID);
-			JsonArray sim = similar.getAsJsonArray("movies");
-			
+			JsonArray similar = null;
 			
  			Movie v = new Movie(ID, Title, Image, Aarstall, MPAArating, Runtime, Release, Score, 
- 					userScore, Synopsis, Genre, Cast, Favourited, Link, sim);
+ 					userScore, Synopsis, Genre, Cast, Favourited, Link, similar);
  			
  			movieLibrary.getMyFavourites().add(v);
  			
 		}
-		
 	}
 	
 	/**

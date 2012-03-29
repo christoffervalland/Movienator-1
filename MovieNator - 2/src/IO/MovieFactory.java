@@ -102,7 +102,7 @@ public class MovieFactory {
 		JsonElement jsonSynopsis = movieObject.get("synopsis");
 		JsonElement jsonPosters = movieObject.get("posters");
 		JsonElement jsonDetailedPoster = jsonPosters.getAsJsonObject().get("detailed");
-
+		
 		JsonElement jsonLinks = movieObject.get("links");
 		JsonElement linksDetailed = jsonLinks.getAsJsonObject().get("alternate");
 		String detailedLink = linksDetailed.getAsString();
@@ -206,7 +206,6 @@ public class MovieFactory {
 	 * @author Eystein Dav¿en
 	 */
 	public void saveFavourites() {
-		// TODO Auto-generated method stub
 		ArrayList<Long> favouriteList = new ArrayList<Long>();
 		favouriteList.addAll(favourites);
 		try {

@@ -67,11 +67,10 @@ public class FavouritesController implements MouseListener {
 		}
 		
 		if(applicationController.getActiveUser() != null){
-		
 		favouritesView.removeAll();
 		
 		for(int i = 0; i < movieLibrary.getMyFavourites().size(); i+=5) {
-
+			
 			JPanel fiveSearchMoviePostersPanel = new JPanel();
 			fiveSearchMoviePostersPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 			
@@ -87,9 +86,7 @@ public class FavouritesController implements MouseListener {
 			}
 			favouritesView.add(fiveSearchMoviePostersPanel);
 			favouritesView.repaint();
-			applicationController.paintFavouritesPanel();
 			}
-		
 		}
 	}
 
@@ -105,7 +102,6 @@ public class FavouritesController implements MouseListener {
 		for(Movie movie : movieLibrary.getMyFavourites()){
 			if (movie.getID() ==  poster.getMovieID()){
 				favMovie = movie;	
-				moviePanelController.getMoviePanelView().addLoader();
 				moviePanelController.setMoviePanelValues(favMovie);
 				applicationController.setMoviePanelTab();
 			}		

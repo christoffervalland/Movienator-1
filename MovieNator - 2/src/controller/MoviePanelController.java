@@ -103,7 +103,7 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 		@Override
 		protected Void doInBackground() throws Exception {
 
-			setSimilar(movieID);
+			setSimilar(movieID);				
 
 			return null;
 		}
@@ -189,12 +189,13 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 	 * adds a movie to the favouriteList, if user is not logged in get error dialog
 	 */
 	public void addToFavourites(){
-
+		
 		if(applicationController.getActiveUser() == null) {
 			String error = "You have to be logged in to do this";
 			ErrorHandler.getErrorMessage(error);
 		} else {
 			movie.setFavourited(true);
+			moviePanelView.getAddToFavouriteButton().setText("Remove favourited");
 			movieLibrary.setFavouriteMovie(movie);
 			applicationController.getFavouritesController().setFavouritePosters();
 			if(applicationController.getActiveUser() == null) {
@@ -209,13 +210,7 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 				ErrorHandler.getErrorMessage(error);
 
 			}
-			catch(NullPointerException e){
-				error = "Unable to connect to account";
-				ErrorHandler.getErrorMessage(error);
-
-			}
 		}
-
 	}
 
 	/**
@@ -291,7 +286,7 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 		fiveSimilarMoviesPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 0));
 
 		if(jsonSimilar != null){
-			for(JsonElement e: jsonSimilar){
+			for(JsonElement e : jsonSimilar){
 				movieLibrary.getSimilarMovies().add(movieFac.jsonMovieToMovie(e));
 			}
 			for (Movie movie : movieLibrary.getSimilarMovies())	{			
@@ -303,16 +298,10 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 			moviePanelView.getSimilarPanel().removeAll();
 			moviePanelView.getSimilarPanel().validate();
 			moviePanelView.getSimilarPanel().add(fiveSimilarMoviesPanel);
-			moviePanelView.repaint();
+			moviePanelView.repaint();								
 		}
 	}
-	
-	/**
-	 * Disables favouriteButton
-	 */
-	public void enableFavouriteButton(boolean value){
-		moviePanelView.getAddToFavouriteButton().setEnabled(value);
-	}
+
 
 	/**
 	 * EventListener the checks the button for changes.
@@ -322,15 +311,9 @@ public class MoviePanelController extends Thread implements ActionListener, Mous
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
 		if(actionCommand == "Add to favourite"){
-			movieLibrary.getMyFavourites().clear();
-			applicationController.getFavouritesController().getFavouritesView().removeAll();
-			applicationController.getFavouritesController().getFavouritesView().validate();
 			addToFavourites();
 			moviePanelView.repaint();
 		} else if(actionCommand == "Remove favourited") {
-			movieLibrary.getMyFavourites().clear();
-			applicationController.getFavouritesController().getFavouritesView().removeAll();
-			applicationController.getFavouritesController().getFavouritesView().validate();
 			removeFromFavourites();
 			moviePanelView.repaint();
 		} else if(actionCommand == "Full Reviews Online"){

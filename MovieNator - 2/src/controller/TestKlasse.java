@@ -12,5 +12,8 @@ public class TestKlasse {
 	public int getTest() {
 		return test;
 	}
-
+	
+	public void setTest(int newInt) {
+		test = newInt;
+	}
 }

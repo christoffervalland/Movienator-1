@@ -11,6 +11,7 @@ public class TestKlasse {
 	
 	public int getTest() {
 		return test;
+		//Morradi! Helsing CV
 	}
 
 }

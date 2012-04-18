@@ -16,4 +16,8 @@ public class TestKlasse {
 	public void setTest(int newInt) {
 		test = newInt;
 	}
+	
+	public void setTestFem() {
+		test = 5;
+	}
 }
